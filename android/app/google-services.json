@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "909174889096",
+    "project_id": "pharmalist-303df",
+    "storage_bucket": "pharmalist-303df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909174889096:android:96032f872e5a748c521d3d",
+        "android_client_info": {
+          "package_name": "com.pharmalist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrT1vJSebJt3ih_FzA0oHO07_hnWM0nJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
