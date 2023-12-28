@@ -4,6 +4,7 @@ import auth from '@react-native-firebase/auth';
 import Brands from './src/pages/Brands';
 import Login from './src/components/Login';
 import Categories from './src/pages/Categories';
+import Products from './src/pages/Products';
 
 const Tab = createMaterialTopTabNavigator();
 const App = () => {
@@ -28,7 +29,8 @@ const App = () => {
     return <Login />;
   }
   return (
-    <Tab.Navigator initialRouteName="Brands">
+    <Tab.Navigator initialRouteName="Products">
+      <Tab.Screen name="Products" component={Products} />
       <Tab.Screen name="Brands" component={Brands} />
       <Tab.Screen name="Categories" component={Categories} />
     </Tab.Navigator>
