@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import auth from '@react-native-firebase/auth';
-import Brands from './pages/Brands';
-import Login from './components/Login';
-import Categories from './pages/Categories';
+import Brands from './src/pages/Brands';
+import Login from './src/components/Login';
+import Categories from './src/pages/Categories';
 
 const Tab = createMaterialTopTabNavigator();
 const App = () => {
