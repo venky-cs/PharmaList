@@ -1663,6 +1663,10 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
+  - react-native-pager-view (6.2.3):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
   - React-nativeconfig (0.73.1)
   - React-NativeModulesApple (0.73.1):
     - glog
@@ -1888,6 +1892,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -2001,6 +2006,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
+  react-native-pager-view:
+    :path: "../node_modules/react-native-pager-view"
   React-nativeconfig:
     :path: "../node_modules/react-native/ReactCommon"
   React-NativeModulesApple:
@@ -2107,6 +2114,7 @@ SPEC CHECKSUMS:
   React-logger: e0c1e918d9588a9f39c9bc62d9d6bfe9ca238d9d
   React-Mapbuffer: babe0bb3746937775f8a3a89b861cea3c077162d
   react-native-image-picker: e3b3e0b18a3a33c16a98e4e9c291327a9c3d6f36
+  react-native-pager-view: 33c56e3b547d2f29d224255d82e796942e0918b8
   React-nativeconfig: a8685fce6d0ffbb77b1fe983895dbbc7bfe949ad
   React-NativeModulesApple: 63accd5672e433f187e4c35ce61641f2b303098c
   React-perflogger: 5ffc4d6ccb74eaac7b8b2867e58a447232483d6d
