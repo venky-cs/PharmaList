@@ -1,11 +1,11 @@
 import React from 'react';
 import {View} from 'react-native';
-import ShowCollection from '../components/ShowCollection';
+import ShowCollections from '../components/ShowCollections';
 
 function Categories() {
   return (
     <View>
-      <ShowCollection collection="Category" />
+      <ShowCollections collection="Category" />
     </View>
   );
 }

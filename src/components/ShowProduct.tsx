@@ -16,7 +16,6 @@ function ShowProduct() {
 
   const route = useRoute();
   const {product} = route.params;
-  console.log(product);
   const handleEdit = () => {
     // Implement your edit logic here
     Alert.alert(
@@ -42,7 +41,6 @@ function ShowProduct() {
           id: documentSnapshot.id,
           ...documentSnapshot.data(),
         };
-        console.log('results: ', documentData);
         setBrandName(documentData?.title);
         return documentData;
       } else {
@@ -66,7 +64,6 @@ function ShowProduct() {
           id: documentSnapshot.id,
           ...documentSnapshot.data(),
         };
-        console.log('results: ', documentData);
         setCategoryName(documentData?.title);
         return documentData;
       } else {

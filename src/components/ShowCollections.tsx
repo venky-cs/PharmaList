@@ -1,32 +1,39 @@
 import React, {useEffect, useState} from 'react';
-import firestore from '@react-native-firebase/firestore';
 import {
   Text,
   View,
   ActivityIndicator,
   StyleSheet,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import {Card, Button, Dialog} from '@rneui/themed';
 import AddCollection from './AddCollection';
 import useFirestoreState from '../Hooks/useFirestoreState';
+import {useNavigation} from '@react-navigation/native';
 
-function ShowCollection({collection}) {
+function ShowCollections({collection}) {
   const [visible, setVisible] = useState(false);
   const [collectionData, collectionDataLoading] = useFirestoreState(collection);
+  const navigation = useNavigation();
 
   const renderItem = ({item}) => (
     <View style={styles.card}>
-      <Card containerStyle={styles.innerCard}>
-        <Card.Image
-          style={styles.cardImage}
-          resizeMode="cover"
-          source={{
-            uri: item.imageURL,
-          }}
-        />
-        <Text style={{textAlign: 'center'}}>{item.title}</Text>
-      </Card>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('Brand', {item: item, collection: collection})
+        }>
+        <Card containerStyle={styles.innerCard}>
+          <Card.Image
+            style={styles.cardImage}
+            resizeMode="cover"
+            source={{
+              uri: item.imageURL,
+            }}
+          />
+          <Text style={{textAlign: 'center'}}>{item.title}</Text>
+        </Card>
+      </TouchableOpacity>
     </View>
   );
 
@@ -89,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ShowCollection;
+export default ShowCollections;
