@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 
-function useBrandState(collection) {
+function useFirestoreState(collection) {
   const [datas, setDatas] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -29,4 +29,4 @@ function useBrandState(collection) {
   return [datas, loading];
 }
 
-export default useBrandState;
+export default useFirestoreState;

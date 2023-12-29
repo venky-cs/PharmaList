@@ -9,32 +9,11 @@ import {
 } from 'react-native';
 import {Card, Button, Dialog} from '@rneui/themed';
 import AddCollection from './AddCollection';
+import useFirestoreState from '../Hooks/useFirestoreState';
 
-function Brands({collection}) {
-  const [datas, setDatas] = useState([]);
-  const [loading, setLoading] = useState(true);
+function ShowCollection({collection}) {
   const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const subscriber = firestore()
-      .collection(collection)
-      .onSnapshot(querySnapshot => {
-        const data = [];
-
-        querySnapshot.forEach(documentSnapshot => {
-          data.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
-
-        setDatas(data);
-        setLoading(false);
-      });
-
-    // Unsubscribe from events when no longer in use
-    return () => subscriber();
-  }, []);
+  const [collectionData, collectionDataLoading] = useFirestoreState(collection);
 
   const renderItem = ({item}) => (
     <View style={styles.card}>
@@ -55,7 +34,7 @@ function Brands({collection}) {
     setVisible(!visible);
   };
 
-  if (loading) {
+  if (collectionDataLoading) {
     return <ActivityIndicator />;
   }
   return (
@@ -80,7 +59,7 @@ function Brands({collection}) {
         <AddCollection collection={collection} closeDialog={toggleDialog} />
       </Dialog>
       <FlatList
-        data={datas}
+        data={collectionData}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         numColumns={2}
@@ -110,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Brands;
+export default ShowCollection;

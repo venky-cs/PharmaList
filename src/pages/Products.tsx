@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View} from 'react-native';
 import {Card, Button, Dialog} from '@rneui/themed';
 import AddProducts from '../components/AddProducts';
+import ShowProducts from '../components/ShowProducts';
 
 const Products = () => {
   const [visible, setVisible] = useState(false);
@@ -12,7 +13,7 @@ const Products = () => {
   return (
     <>
       <Button
-        title={`Add Products`}
+        title={`Add Product`}
         buttonStyle={{
           borderColor: 'rgba(78, 116, 289, 1)',
           alignItems: 'center',
@@ -30,6 +31,7 @@ const Products = () => {
         <Dialog.Title title={`Add Products`} />
         <AddProducts closeDialog={toggleDialog} />
       </Dialog>
+      <ShowProducts />
     </>
   );
 };

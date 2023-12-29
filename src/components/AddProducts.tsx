@@ -112,6 +112,20 @@ function AddProducts({closeDialog}) {
         errorStyle={{color: 'red'}}
         errorMessage={priceError}
       />
+      <Dropdown
+        collection={brandCollection}
+        title={'Brand'}
+        updateValue={val => setBrandId(val)}
+        error={brandIdError}
+        updateError={() => setBrandIdError('')}
+      />
+      <Dropdown
+        collection={categoryCollection}
+        title={'Category'}
+        updateValue={val => setCategoryId(val)}
+        error={categoryIdError}
+        updateError={() => setCategoryIdError('')}
+      />
       <Button
         title="Choose Image"
         buttonStyle={{
@@ -145,20 +159,6 @@ function AddProducts({closeDialog}) {
           />
         </View>
       )}
-      <Dropdown
-        collection={brandCollection}
-        title={'Brand'}
-        updateValue={val => setBrandId(val)}
-        error={brandIdError}
-        updateError={() => setBrandIdError('')}
-      />
-      <Dropdown
-        collection={categoryCollection}
-        title={'Category'}
-        updateValue={val => setCategoryId(val)}
-        error={categoryIdError}
-        updateError={() => setCategoryIdError('')}
-      />
 
       <Button
         style={{marginTop: 10}}
