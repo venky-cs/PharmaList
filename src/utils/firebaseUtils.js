@@ -4,7 +4,6 @@ import RNFS from 'react-native-fs';
 
 export const uploadImageToFirebase = async image => {
   const storageRef = storage().ref(`images/${image.fileName}`);
-  console.log(storageRef);
 
   const imageUri = image.uri;
   const data = await RNFS.readFile(imageUri, 'base64');

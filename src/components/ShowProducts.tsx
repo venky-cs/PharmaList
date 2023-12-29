@@ -1,34 +1,38 @@
-import React, {useEffect, useState} from 'react';
-import firestore from '@react-native-firebase/firestore';
+import React from 'react';
 import {
   Text,
   View,
   ActivityIndicator,
   StyleSheet,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import {Card, Button, Dialog} from '@rneui/themed';
 import useFirestoreState from '../Hooks/useFirestoreState';
+import {useNavigation} from '@react-navigation/native';
 
 function ShowProducts() {
   const [productCollection, productCollectionLoading] =
     useFirestoreState('Product');
+  const navigation = useNavigation();
 
   const renderItem = ({item}) => (
     <View style={styles.card}>
-      <Card containerStyle={styles.innerCard}>
-        <Card.Image
-          style={styles.cardImage}
-          resizeMode="cover"
-          source={{
-            uri: item.imageURL,
-          }}
-        />
-        <View style={styles.cardInfo}>
-          <Text style={styles.cardTitle}>{item.title}</Text>
-          <Text>₹ {item.price}</Text>
-        </View>
-      </Card>
+      <TouchableOpacity onPress={() => navigation.navigate('Product')}>
+        <Card containerStyle={styles.innerCard}>
+          <Card.Image
+            style={styles.cardImage}
+            resizeMode="cover"
+            source={{
+              uri: item.imageURL,
+            }}
+          />
+          <View style={styles.cardInfo}>
+            <Text style={styles.cardTitle}>{item.title}</Text>
+            <Text>₹ {item.price}</Text>
+          </View>
+        </Card>
+      </TouchableOpacity>
     </View>
   );
 

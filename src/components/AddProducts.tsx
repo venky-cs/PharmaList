@@ -49,7 +49,6 @@ function AddProducts({closeDialog}) {
       return;
     }
     if (!brandId) {
-      console.log('BRSND', brandId);
       setBrandIdError(`Please Select Product Brand`);
       return;
     }

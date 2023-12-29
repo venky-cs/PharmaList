@@ -24,7 +24,6 @@ function useFirestoreState(collection) {
     // Unsubscribe from events when no longer in use
     return () => subscriber();
   }, []);
-  console.log(collection, datas);
 
   return [datas, loading];
 }
