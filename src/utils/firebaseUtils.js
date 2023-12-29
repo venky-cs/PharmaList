@@ -21,3 +21,19 @@ export const addDataToFirestore = async ({title, imageURL, collection}) => {
     imageURL,
   });
 };
+
+export const addProductToFirestore = async ({
+  title,
+  imageURL,
+  price,
+  brandId,
+  categoryId,
+}) => {
+  await firestore().collection('Product').add({
+    title,
+    imageURL,
+    price,
+    brandId,
+    categoryId,
+  });
+};

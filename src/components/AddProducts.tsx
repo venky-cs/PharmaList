@@ -3,11 +3,13 @@ import {View, Image, Alert, ActivityIndicator} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {
   uploadImageToFirebase,
-  addDataToFirestore,
+  addProductToFirestore,
 } from '../utils/firebaseUtils';
 import {Input, Button, Text} from '@rneui/themed';
+import Dropdown from './Dropdown';
+import useFirestoreState from '../Hooks/useFirestoreState';
 
-function AddProducts(closeDialog) {
+function AddProducts({closeDialog}) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState(null);
@@ -15,6 +17,13 @@ function AddProducts(closeDialog) {
   const [priceError, setPriceError] = useState('');
   const [imageError, setImageError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [brandCollection, brandCollectionLoading] = useFirestoreState('Brand');
+  const [categoryCollection, categoryCollectionLoading] =
+    useFirestoreState('Category');
+  const [brandId, setBrandId] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+  const [brandIdError, setBrandIdError] = useState('');
+  const [categoryIdError, setCategoryIdError] = useState('');
 
   const handleChooseImage = async () => {
     const options = {};
@@ -39,16 +48,32 @@ function AddProducts(closeDialog) {
       setImageError(`Please Select Product Image`);
       return;
     }
+    if (!brandId) {
+      console.log('BRSND', brandId);
+      setBrandIdError(`Please Select Product Brand`);
+      return;
+    }
+    if (!categoryId) {
+      setCategoryIdError(`Please Select Product Category`);
+      return;
+    }
     setLoading(true);
     try {
       // Upload image to Firebase Storage
       const imageURL = await uploadImageToFirebase(image);
+      const Product = 'Product';
 
       // Add title and image URL to Firestore
-      await addDataToFirestore({title, imageURL, collection});
+      await addProductToFirestore({
+        title,
+        imageURL,
+        price,
+        brandId,
+        categoryId,
+      });
       setLoading(false);
 
-      Alert.alert('Success', `${collection} created successfully!`);
+      Alert.alert('Success', `Product created successfully!`);
     } catch (error) {
       setLoading(false);
       console.error('Error uploading data:', error);
@@ -58,7 +83,7 @@ function AddProducts(closeDialog) {
     }
   };
 
-  if (loading) {
+  if (loading || brandCollectionLoading || categoryCollectionLoading) {
     return <ActivityIndicator />;
   }
 
@@ -120,6 +145,21 @@ function AddProducts(closeDialog) {
           />
         </View>
       )}
+      <Dropdown
+        collection={brandCollection}
+        title={'Brand'}
+        updateValue={val => setBrandId(val)}
+        error={brandIdError}
+        updateError={() => setBrandIdError('')}
+      />
+      <Dropdown
+        collection={categoryCollection}
+        title={'Category'}
+        updateValue={val => setCategoryId(val)}
+        error={categoryIdError}
+        updateError={() => setCategoryIdError('')}
+      />
+
       <Button
         style={{marginTop: 10}}
         title={`Add Products`}

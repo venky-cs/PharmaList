@@ -1,39 +1,32 @@
 import React, {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
-import {Text, View, ActivityIndicator} from 'react-native';
 
-function Brands() {
-  const [brands, setBrands] = useState([]);
+function useBrandState(collection) {
+  const [datas, setDatas] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const subscriber = firestore()
-      .collection('Brands')
+      .collection(collection)
       .onSnapshot(querySnapshot => {
-        const brands = [];
+        const data = [];
 
         querySnapshot.forEach(documentSnapshot => {
-          brands.push({
+          data.push({
             ...documentSnapshot.data(),
             key: documentSnapshot.id,
           });
         });
 
-        setBrands(brands);
+        setDatas(data);
         setLoading(false);
       });
 
     // Unsubscribe from events when no longer in use
     return () => subscriber();
   }, []);
-  console.log('brands', brands);
-  if (loading) {
-    return <ActivityIndicator />;
-  }
-  return (
-    <View>
-      <Text>tr</Text>
-    </View>
-  );
+  console.log(collection, datas);
+
+  return [datas, loading];
 }
 
-export default Brands;
+export default useBrandState;
