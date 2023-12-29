@@ -18,7 +18,8 @@ function ShowProducts() {
 
   const renderItem = ({item}) => (
     <View style={styles.card}>
-      <TouchableOpacity onPress={() => navigation.navigate('Product')}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Product', {product: item})}>
         <Card containerStyle={styles.innerCard}>
           <Card.Image
             style={styles.cardImage}
