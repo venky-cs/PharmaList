@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
-import {Card, Button, Dialog} from '@rneui/themed';
-import AddProducts from '../components/AddProducts';
+import React from 'react';
+import {Button} from '@rneui/themed';
 import ShowProducts from '../components/ShowProducts';
+import {useNavigation} from '@react-navigation/native';
 
 const Products = () => {
-  const [visible, setVisible] = useState(false);
-
-  const toggleDialog = () => {
-    setVisible(!visible);
+  const navigation = useNavigation();
+  const createProduct = () => {
+    navigation.navigate('AddProduct');
   };
   return (
     <>
@@ -25,12 +23,9 @@ const Products = () => {
           marginHorizontal: 50,
           marginVertical: 10,
         }}
-        onPress={toggleDialog}
+        onPress={createProduct}
       />
-      <Dialog isVisible={visible} onBackdropPress={toggleDialog}>
-        <Dialog.Title title={`Add Products`} />
-        <AddProducts closeDialog={toggleDialog} />
-      </Dialog>
+
       <ShowProducts />
     </>
   );

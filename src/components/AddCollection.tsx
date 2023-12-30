@@ -6,13 +6,19 @@ import {
   addDataToFirestore,
 } from '../utils/firebaseUtils';
 import {Input, Button, Text} from '@rneui/themed';
+import {useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
-function AddCollection({collection, closeDialog}) {
+function AddCollection() {
   const [title, setTitle] = useState('');
   const [image, setImage] = useState(null);
   const [titleError, setTitleError] = useState('');
   const [imageError, setImageError] = useState('');
   const [loading, setLoading] = useState(false);
+  const route = useRoute();
+  const {collection} = route.params;
+  const navigation = useNavigation();
+  console.log('Nav', collection);
 
   const handleChooseImage = async () => {
     const options = {};
@@ -48,7 +54,9 @@ function AddCollection({collection, closeDialog}) {
       console.error('Error uploading data:', error);
       Alert.alert('Error', 'Failed to upload data. Please try again.');
     } finally {
-      closeDialog();
+      collection === 'Brand'
+        ? navigation.navigate('Brands')
+        : navigation.navigate('Categories');
     }
   };
 

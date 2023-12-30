@@ -10,6 +10,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import ShowProduct from './src/components/ShowProduct';
 import Login from './src/components/Login';
 import ShowProductByCollection from './src/components/ShowProductByCollection';
+import AddProducts from './src/components/AddProducts';
+import AddCollection from './src/components/AddCollection';
 
 const Stack = createStackNavigator();
 const AppComponent = () => {
@@ -25,6 +27,9 @@ const AppComponent = () => {
         <Stack.Screen name="Product" component={ShowProduct} />
         <Stack.Screen name="Brand" component={ShowProductByCollection} />
         <Stack.Screen name="Category" component={ShowProductByCollection} />
+        <Stack.Screen name="AddProduct" component={AddProducts} />
+        <Stack.Screen name="AddBrand" component={AddCollection} />
+        <Stack.Screen name="AddCategory" component={AddCollection} />
       </Stack.Navigator>
     </NavigationContainer>
   );

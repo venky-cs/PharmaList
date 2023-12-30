@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   Text,
   View,
@@ -7,13 +7,11 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import {Card, Button, Dialog} from '@rneui/themed';
-import AddCollection from './AddCollection';
+import {Card, Button} from '@rneui/themed';
 import useFirestoreState from '../Hooks/useFirestoreState';
 import {useNavigation} from '@react-navigation/native';
 
 function ShowCollections({collection}) {
-  const [visible, setVisible] = useState(false);
   const [collectionData, collectionDataLoading] = useFirestoreState(collection);
   const navigation = useNavigation();
 
@@ -21,7 +19,7 @@ function ShowCollections({collection}) {
     <View style={styles.card}>
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('Brand', {item: item, collection: collection})
+          navigation.navigate(collection, {item: item, collection: collection})
         }>
         <Card containerStyle={styles.innerCard}>
           <Card.Image
@@ -37,8 +35,8 @@ function ShowCollections({collection}) {
     </View>
   );
 
-  const toggleDialog = () => {
-    setVisible(!visible);
+  const createCollection = () => {
+    navigation.navigate(`Add${collection}`, {collection: collection});
   };
 
   if (collectionDataLoading) {
@@ -59,12 +57,8 @@ function ShowCollections({collection}) {
           marginHorizontal: 50,
           marginVertical: 10,
         }}
-        onPress={toggleDialog}
+        onPress={createCollection}
       />
-      <Dialog isVisible={visible} onBackdropPress={toggleDialog}>
-        <Dialog.Title title={`Add ${collection}`} />
-        <AddCollection collection={collection} closeDialog={toggleDialog} />
-      </Dialog>
       <FlatList
         data={collectionData}
         renderItem={renderItem}

@@ -8,8 +8,9 @@ import {
 import {Input, Button, Text} from '@rneui/themed';
 import Dropdown from './Dropdown';
 import useFirestoreState from '../Hooks/useFirestoreState';
+import {useNavigation} from '@react-navigation/native';
 
-function AddProducts({closeDialog}) {
+function AddProducts() {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState(null);
@@ -24,6 +25,7 @@ function AddProducts({closeDialog}) {
   const [categoryId, setCategoryId] = useState('');
   const [brandIdError, setBrandIdError] = useState('');
   const [categoryIdError, setCategoryIdError] = useState('');
+  const navigation = useNavigation();
 
   const handleChooseImage = async () => {
     const options = {};
@@ -78,7 +80,7 @@ function AddProducts({closeDialog}) {
       console.error('Error uploading data:', error);
       Alert.alert('Error', 'Failed to upload data. Please try again.');
     } finally {
-      closeDialog();
+      navigation.navigate('Products');
     }
   };
 
