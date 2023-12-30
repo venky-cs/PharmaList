@@ -8,7 +8,8 @@ import {name as appName} from './app.json';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import ShowProduct from './src/components/ShowProduct';
-import Login from './src/components/Login';
+import SignIn from './src/pages/Stack/SignIn';
+import SignUp from './src/pages/Stack/SignUp';
 import ShowProductByCollection from './src/components/ShowProductByCollection';
 import AddProducts from './src/components/AddProducts';
 import AddCollection from './src/components/AddCollection';
@@ -17,8 +18,17 @@ const Stack = createStackNavigator();
 const AppComponent = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Main">
-        <Stack.Screen name="Login" component={Login} />
+      <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Screen
+          name="SignIn"
+          component={SignIn}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Main"
           component={App}
