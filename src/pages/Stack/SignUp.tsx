@@ -50,7 +50,6 @@ function SignUp() {
     setUser(prevState => ({...prevState, [field]: value}));
   };
   const signUp = async () => {
-    console.log('User', user?.email, user?.password);
     setLoading(true);
     setError('');
     try {
@@ -87,12 +86,16 @@ function SignUp() {
         value={user?.name}
         onChangeText={name => handleChange('name', name)}
         placeholder="Name"
+        placeholderTextColor="black"
+        color="black"
       />
       <TextInput
         style={styles.input}
         value={user?.email}
         onChangeText={email => handleChange('email', email)}
         placeholder="Email"
+        placeholderTextColor="black"
+        color="black"
       />
       <TextInput
         style={styles.input}
@@ -100,6 +103,8 @@ function SignUp() {
         onChangeText={password => handleChange('password', password)}
         placeholder="Password"
         secureTextEntry={true}
+        placeholderTextColor="black"
+        color="black"
       />
       {error !== '' && <Text style={styles.errorText}>{error}</Text>}
       <TouchableOpacity

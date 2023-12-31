@@ -29,7 +29,7 @@ function ShowCollections({collection}) {
               uri: item.imageURL,
             }}
           />
-          <Text style={{textAlign: 'center'}}>{item.title}</Text>
+          <Text style={styles.cardTitle}>{item.title}</Text>
         </Card>
       </TouchableOpacity>
     </View>
@@ -80,13 +80,35 @@ const styles = StyleSheet.create({
   },
   innerCard: {
     flex: 1,
-    borderRadius: 10, // Add border radius to the entire Card
-    overflow: 'hidden', // Clip the content to the border radius
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   cardImage: {
     flex: 1,
     aspectRatio: 1,
-    // Apply additional styles to the image as needed
+  },
+  cardTitle: {
+    textAlign: 'center',
+    marginTop: 10,
+    fontSize: 14,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  addButton: {
+    borderColor: 'rgba(78, 116, 289, 1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+  },
+  addButtonTitle: {
+    color: 'rgba(78, 116, 289, 1)',
+  },
+  addButtonContainer: {
+    marginHorizontal: 20,
+    marginVertical: 10,
+  },
+  footer: {
+    height: 70,
   },
 });
 

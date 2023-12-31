@@ -92,13 +92,13 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     marginRight: 10,
-    color: '#333',
-    textAlign: 'right',
+    color: 'black',
+    textAlign: 'left',
   },
   userInfoText: {
     flex: 2,
     fontSize: 16,
-    color: '#555',
+    color: 'black',
   },
   logoutButton: {
     backgroundColor: '#e74c3c',

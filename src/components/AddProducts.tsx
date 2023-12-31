@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Image, Alert, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Image,
+  Alert,
+  ActivityIndicator,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {
   uploadImageToFirebase,
@@ -89,85 +96,107 @@ function AddProducts() {
   }
 
   return (
-    <View>
-      <Input
-        placeholder={`Enter Product Name`}
-        value={title}
-        onChangeText={text => {
-          setTitle(text);
-          setTitleError('');
-        }}
-        errorStyle={{color: 'red'}}
-        errorMessage={titleError}
-      />
-      <Input
-        placeholder={`Enter Product Price`}
-        value={price}
-        onChangeText={text => {
-          if (/^\d+$/.test(text.toString())) {
-            setPrice(text);
-            setPriceError('');
-          }
-        }}
-        keyboardType="numeric"
-        errorStyle={{color: 'red'}}
-        errorMessage={priceError}
-      />
-      <Dropdown
-        collection={brandCollection}
-        title={'Brand'}
-        updateValue={val => setBrandId(val)}
-        error={brandIdError}
-        updateError={() => setBrandIdError('')}
-      />
-      <Dropdown
-        collection={categoryCollection}
-        title={'Category'}
-        updateValue={val => setCategoryId(val)}
-        error={categoryIdError}
-        updateError={() => setCategoryIdError('')}
-      />
-      <Button
-        title="Choose Image"
-        buttonStyle={{
-          borderColor: 'rgba(78, 116, 289, 1)',
-        }}
-        type="outline"
-        raised
-        titleStyle={{color: 'rgba(78, 116, 289, 1)'}}
-        containerStyle={{
-          marginHorizontal: 50,
-          marginVertical: 10,
-        }}
-        onPress={handleChooseImage}
-      />
-      {imageError && <Text style={{color: 'red'}}>{imageError}</Text>}
-      {image && (
-        <View
-          style={{
-            alignItems: 'center', // Center the image horizontally
-            justifyContent: 'center', // Center the image vertically
-            marginBottom: 10,
-          }}>
-          <Image
-            source={{uri: image?.uri}}
-            style={{
-              width: 150,
-              height: 200,
-              borderWidth: 2, // Set border width
-              borderColor: 'black', // Set border color
-            }}
-          />
-        </View>
-      )}
+    <ScrollView contentContainerStyle={styles.scrollView}>
+      <View style={styles.container}>
+        <Input
+          style={styles.input}
+          placeholder={`Enter Product Name`}
+          value={title}
+          onChangeText={text => {
+            setTitle(text);
+            setTitleError('');
+          }}
+          errorStyle={{color: 'red'}}
+          errorMessage={titleError}
+          placeholderTextColor="black"
+          color="black"
+        />
+        <Input
+          style={styles.input}
+          placeholder={`Enter Product Price`}
+          value={price}
+          onChangeText={text => {
+            if (/^\d+$/.test(text.toString())) {
+              setPrice(text);
+              setPriceError('');
+            }
+          }}
+          keyboardType="numeric"
+          errorStyle={{color: 'red'}}
+          errorMessage={priceError}
+          placeholderTextColor="black"
+          color="black"
+        />
+        <Dropdown
+          collection={brandCollection}
+          title={'Brand'}
+          updateValue={val => setBrandId(val)}
+          error={brandIdError}
+          updateError={() => setBrandIdError('')}
+          style={{color: 'black'}}
+        />
+        <Dropdown
+          collection={categoryCollection}
+          title={'Category'}
+          updateValue={val => setCategoryId(val)}
+          error={categoryIdError}
+          updateError={() => setCategoryIdError('')}
+          style={{color: 'black'}}
+        />
+        <Button
+          title="Choose Image"
+          buttonStyle={{
+            borderColor: 'rgba(78, 116, 289, 1)',
+          }}
+          type="outline"
+          raised
+          titleStyle={{color: 'rgba(78, 116, 289, 1)'}}
+          containerStyle={{
+            marginHorizontal: 50,
+            marginVertical: 10,
+          }}
+          onPress={handleChooseImage}
+        />
+        {imageError && <Text style={{color: 'red'}}>{imageError}</Text>}
+        {image && (
+          <View style={styles.imageContainer}>
+            <Image source={{uri: image?.uri}} style={styles.image} />
+          </View>
+        )}
 
-      <Button
-        style={{marginTop: 10}}
-        title={`Add Products`}
-        onPress={handleUpload}
-      />
-    </View>
+        <Button
+          style={styles.button}
+          title={`Add Products`}
+          onPress={handleUpload}
+        />
+      </View>
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff', // Set background color
+  },
+  input: {
+    marginBottom: 10,
+  },
+  imageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  image: {
+    width: 150,
+    height: 200,
+    borderWidth: 2,
+    borderColor: 'black',
+  },
+  button: {
+    marginTop: 10,
+  },
+});
 
 export default AddProducts;

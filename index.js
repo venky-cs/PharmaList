@@ -2,7 +2,7 @@
  * @format
  */
 import 'react-native-gesture-handler';
-import {AppRegistry} from 'react-native';
+import {AppRegistry, StatusBar} from 'react-native';
 import App from './App';
 import {name as appName} from './app.json';
 import {NavigationContainer} from '@react-navigation/native';
@@ -15,7 +15,7 @@ import AddProducts from './src/components/AddProducts';
 import AddCollection from './src/components/AddCollection';
 import {navigationRef} from './src/utils/navigationRef';
 import auth from '@react-native-firebase/auth';
-
+StatusBar.setBarStyle('light-content');
 const Stack = createStackNavigator();
 const AppComponent = () => {
   return (

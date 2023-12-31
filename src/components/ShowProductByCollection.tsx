@@ -106,24 +106,28 @@ function ShowProductByCollection() {
           {/* Add other brand details as needed */}
         </View>
       </View>
-      {!products.length ? (
-        <Text style={styles.noProductText}>No Product Found</Text>
+      {products.length > 0 ? (
+        <>
+          <Text style={styles.sectionHeaderText}>Products</Text>
+          <FlatList
+            data={products}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </>
       ) : (
-        <Text style={styles.noProductText}>Products</Text>
+        <Text style={styles.noProductText}>
+          No products found for this {collection}
+        </Text>
       )}
-      <FlatList
-        data={products}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-      />
-      <View style={styles.actions}>
+      {/* <View style={styles.actions}>
         <TouchableOpacity onPress={handleEdit}>
           <Text style={styles.actionText}>Edit</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleDelete}>
           <Text style={styles.actionText}>Delete</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -184,10 +188,12 @@ const styles = StyleSheet.create({
   productTitle: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: 'black',
   },
   productPrice: {
     fontSize: 14,
-    color: '#555',
+    fontWeight: 'bold',
+    color: 'black',
   },
   brandContainer: {
     flexDirection: 'row',
@@ -207,12 +213,20 @@ const styles = StyleSheet.create({
   brandName: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: 'black',
   },
   noProductText: {
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 20,
+    color: 'black',
+  },
+  sectionHeaderText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: 'black',
   },
 });
 

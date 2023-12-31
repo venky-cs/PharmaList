@@ -158,11 +158,12 @@ const styles = StyleSheet.create({
   propertyName: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: 'black',
     width: '40%', // Adjust width as needed
   },
   propertyValue: {
     fontSize: 16,
-    color: '#555',
+    color: 'black',
     width: '60%', // Adjust width as needed
   },
   actions: {
@@ -173,6 +174,7 @@ const styles = StyleSheet.create({
   actionText: {
     color: 'blue',
     fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

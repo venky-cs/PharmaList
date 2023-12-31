@@ -50,7 +50,6 @@ function SignIn() {
     }
     setLoading(true);
 
-    console.log('User', user?.email, user?.password);
     auth()
       .signInWithEmailAndPassword(user?.email, user?.password)
       .then(() => {
@@ -82,6 +81,8 @@ function SignIn() {
         value={user?.email}
         onChangeText={email => handleChange('email', email)}
         placeholder="Email"
+        placeholderTextColor="black"
+        color="black"
       />
       <TextInput
         style={styles.input}
@@ -89,6 +90,8 @@ function SignIn() {
         onChangeText={password => handleChange('password', password)}
         placeholder="Password"
         secureTextEntry={true}
+        placeholderTextColor="black"
+        color="black"
       />
       {error !== '' && <Text style={styles.errorText}>{error}</Text>}
       <TouchableOpacity

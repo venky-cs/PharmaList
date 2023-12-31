@@ -30,7 +30,7 @@ function ShowProducts() {
           />
           <View style={styles.cardInfo}>
             <Text style={styles.cardTitle}>{item.title}</Text>
-            <Text>₹ {item.price}</Text>
+            <Text style={styles.cardTitle}>₹ {item.price}</Text>
           </View>
         </Card>
       </TouchableOpacity>
@@ -49,7 +49,7 @@ function ShowProducts() {
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
           contentContainerStyle={styles.scrollViewContainer}
-          ListFooterComponent={<View style={{height: 70}} />}
+          ListFooterComponent={<View style={styles.footer} />}
         />
       )}
     </>
@@ -65,23 +65,41 @@ const styles = StyleSheet.create({
   },
   innerCard: {
     flex: 1,
-    borderRadius: 10, // Add border radius to the entire Card
-    overflow: 'hidden', // Clip the content to the border radius
+    borderRadius: 10,
+    overflow: 'hidden',
+    elevation: 2, // Add shadow for an elevated look
   },
   cardImage: {
     flex: 1,
     aspectRatio: 1,
-    // Apply additional styles to the image as needed
+    borderRadius: 10, // Adjust border radius
   },
   cardInfo: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 10,
   },
   cardTitle: {
-    paddingTop: 10,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
+    color: 'black',
+  },
+  loadingIndicator: {
+    marginTop: 20,
+  },
+  emptyStateContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyStateText: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#555',
+  },
+  footer: {
+    height: 70,
   },
 });
 

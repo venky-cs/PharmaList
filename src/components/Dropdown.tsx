@@ -17,7 +17,7 @@ const DropdownComponent = ({
   const renderLabel = () => {
     if (value || isFocus) {
       return (
-        <Text style={[styles.label, isFocus && {color: 'blue'}]}>{title}</Text>
+        <Text style={[styles.label, isFocus && {color: 'black'}]}>{title}</Text>
       );
     }
     return null;
@@ -26,7 +26,11 @@ const DropdownComponent = ({
     <View style={styles.container}>
       {renderLabel()}
       <Dropdown
-        style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
+        style={[
+          styles.dropdown,
+          isFocus && {borderColor: 'black'},
+          {color: 'black'},
+        ]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
@@ -76,12 +80,17 @@ const styles = StyleSheet.create({
     zIndex: 999,
     paddingHorizontal: 8,
     fontSize: 14,
+    color: 'black',
   },
   placeholderStyle: {
     fontSize: 16,
+    color: 'black',
+    backgroundColor: 'white',
   },
   selectedTextStyle: {
     fontSize: 16,
+    color: 'black',
+    backgroundColor: 'white',
   },
   iconStyle: {
     width: 20,
@@ -90,6 +99,8 @@ const styles = StyleSheet.create({
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
+    color: 'black',
+    backgroundColor: 'white',
   },
 });
 

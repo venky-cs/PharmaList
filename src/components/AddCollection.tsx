@@ -18,7 +18,6 @@ function AddCollection() {
   const route = useRoute();
   const {collection} = route.params;
   const navigation = useNavigation();
-  console.log('Nav', collection);
 
   const handleChooseImage = async () => {
     const options = {};
@@ -75,6 +74,8 @@ function AddCollection() {
         }}
         errorStyle={{color: 'red'}}
         errorMessage={titleError}
+        placeholderTextColor="black"
+        color="black"
       />
       <Button
         title="Choose Image"

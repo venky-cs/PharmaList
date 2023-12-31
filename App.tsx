@@ -35,7 +35,7 @@ const App = () => {
       screenOptions={({route}) => ({
         tabBarLabelStyle: {
           fontWeight: 'bold',
-          fontSize: 12,
+          fontSize: 10,
           margin: 0,
           padding: 0,
         },
