@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {navigationRef} from '../../utils/navigationRef';
 
 function SignIn() {
   type userType = {
@@ -24,6 +25,21 @@ function SignIn() {
     setError('');
   }, [user?.email, user?.password]);
 
+  useEffect(() => {
+    if (auth().currentUser) {
+      navigation?.navigate('Main');
+    }
+  }, [navigation]);
+
+  useEffect(() => {
+    if (auth().currentUser) {
+      navigationRef?.current?.reset({
+        index: 0,
+        routes: [{name: 'Main'}],
+      });
+    }
+  }, [navigationRef]);
+
   const handleChange = (field, value) => {
     setUser(prevState => ({...prevState, [field]: value}));
   };
@@ -38,8 +54,10 @@ function SignIn() {
     auth()
       .signInWithEmailAndPassword(user?.email, user?.password)
       .then(() => {
-        console.log('User signed in!');
-        navigation.navigate('Main');
+        navigationRef.current?.reset({
+          index: 0,
+          routes: [{name: 'Main'}],
+        });
       })
       .catch(error => {
         setLoading(false);

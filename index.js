@@ -13,12 +13,15 @@ import SignUp from './src/pages/Stack/SignUp';
 import ShowProductByCollection from './src/components/ShowProductByCollection';
 import AddProducts from './src/components/AddProducts';
 import AddCollection from './src/components/AddCollection';
+import {navigationRef} from './src/utils/navigationRef';
+import auth from '@react-native-firebase/auth';
 
 const Stack = createStackNavigator();
 const AppComponent = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="SignIn">
+    <NavigationContainer ref={navigationRef}>
+      <Stack.Navigator
+        initialRouteName={auth().currentUser ? 'Main' : 'SignIn'}>
         <Stack.Screen
           name="SignIn"
           component={SignIn}

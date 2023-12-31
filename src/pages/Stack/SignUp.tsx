@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {
@@ -10,7 +10,9 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
+
 import {useNavigation} from '@react-navigation/native';
+import {navigationRef} from '../../utils/navigationRef';
 
 function SignUp() {
   type userType = {
@@ -28,6 +30,21 @@ function SignUp() {
   const [loading, setLoading] = useState<boolean>(false);
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (auth().currentUser) {
+      navigation?.navigate('Main');
+    }
+  }, [navigation]);
+
+  useEffect(() => {
+    if (auth().currentUser) {
+      navigationRef?.current?.reset({
+        index: 0,
+        routes: [{name: 'Main'}],
+      });
+    }
+  }, [navigationRef]);
 
   const handleChange = (field, value) => {
     setUser(prevState => ({...prevState, [field]: value}));
@@ -54,7 +71,10 @@ function SignUp() {
       });
 
       Alert.alert('User account created & signed in!');
-      navigation.navigate('Main');
+      navigationRef.current?.reset({
+        index: 0,
+        routes: [{name: 'Main'}],
+      });
     } catch (error) {
       setLoading(false);
       setError(error.message);

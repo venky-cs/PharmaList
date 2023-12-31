@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import {navigationRef} from '../utils/navigationRef';
 
 function UserPage() {
   const [userInfo, setUserInfo] = useState({
@@ -39,7 +40,10 @@ function UserPage() {
     try {
       await auth().signOut();
       // You may want to navigate to the login screen or another appropriate screen
-      Alert.alert('Logged out successfully');
+      navigationRef.current?.reset({
+        index: 0,
+        routes: [{name: 'SignIn'}],
+      });
     } catch (error) {
       console.error('Error logging out', error);
     }
