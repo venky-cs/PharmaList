@@ -6,8 +6,7 @@ import {
   addDataToFirestore,
 } from '../utils/firebaseUtils';
 import {Input, Button, Text} from '@rneui/themed';
-import {useRoute} from '@react-navigation/native';
-import {useNavigation} from '@react-navigation/native';
+import {useRoute, useNavigation} from '@react-navigation/native';
 
 function AddCollection() {
   const [title, setTitle] = useState('');

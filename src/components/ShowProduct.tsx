@@ -6,22 +6,49 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  Modal,
+  Pressable,
 } from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import {useRoute, useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 
 function ShowProduct() {
   const [brandName, setBrandName] = useState('');
   const [categoryName, setCategoryName] = useState('');
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
+  const navigation = useNavigation();
   const route = useRoute();
   const {product} = route.params;
+
   const handleEdit = () => {
-    // Implement your edit logic here
-    Alert.alert(
-      `Edit ${product.title}`,
-      'Edit functionality will be implemented here.',
-    );
+    navigation.navigate('EditProduct', {product: product});
+  };
+
+  const handleDelete = () => {
+    // Show a confirmation modal before deleting the product
+    setIsDeleteModalVisible(true);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      // Delete the product from Firestore
+      await firestore().collection('Product').doc(product.key).delete();
+
+      // Close the modal
+      setIsDeleteModalVisible(false);
+
+      // Navigate back to the previous screen or update the UI as needed
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      // Handle error
+    }
+  };
+
+  const cancelDelete = () => {
+    // Close the confirmation modal
+    setIsDeleteModalVisible(false);
   };
 
   useEffect(() => {
@@ -76,32 +103,6 @@ function ShowProduct() {
     }
   };
 
-  const handleDelete = () => {
-    // Implement your delete logic here
-    Alert.alert(
-      `Delete ${product.title}`,
-      'Delete functionality will be implemented here.',
-    );
-    // Alert.alert(
-    //   'Confirm Deletion',
-    //   'Are you sure you want to delete this product?',
-    //   [
-    //     {
-    //       text: 'Cancel',
-    //       style: 'cancel',
-    //     },
-    //     {
-    //       text: 'Delete',
-    //       style: 'destructive',
-    //       onPress: () => {
-    //         // Delete the product and navigate back
-    //         navigation.goBack();
-    //       },
-    //     },
-    //   ],
-    // );
-  };
-
   return (
     <View style={styles.container}>
       <Image source={{uri: product.imageURL}} style={styles.image} />
@@ -133,6 +134,27 @@ function ShowProduct() {
           <Text style={styles.actionText}>Delete</Text>
         </TouchableOpacity>
       </View>
+      {/* Delete Confirmation Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isDeleteModalVisible}
+        onRequestClose={() => setIsDeleteModalVisible(false)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Confirm Deletion</Text>
+            <Text>Are you sure you want to delete this product?</Text>
+            <View style={styles.modalButtons}>
+              <Pressable style={styles.button} onPress={confirmDelete}>
+                <Text style={styles.buttonText}>Delete</Text>
+              </Pressable>
+              <Pressable style={styles.button} onPress={cancelDelete}>
+                <Text style={styles.buttonText}>Cancel</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -174,6 +196,36 @@ const styles = StyleSheet.create({
   actionText: {
     color: 'blue',
     fontSize: 16,
+    fontWeight: 'bold',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    elevation: 5,
+  },
+  modalText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: '#3498db',
+  },
+  buttonText: {
+    color: 'white',
     fontWeight: 'bold',
   },
 });
