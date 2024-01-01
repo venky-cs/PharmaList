@@ -43,11 +43,14 @@ function EditProduct() {
   const handleUpdate = async updatedProduct => {
     try {
       // Update the Firestore document with the new product details
-      await firestore().collection('Product').doc(updatedProduct.key).update({
-        title: updatedProduct.title,
-        price: updatedProduct.price,
-        // Update other fields as needed
-      });
+      await firestore()
+        .collection('Product')
+        .doc(updatedProduct?.key || updatedProduct?.id)
+        .update({
+          title: updatedProduct.title,
+          price: updatedProduct.price,
+          // Update other fields as needed
+        });
       setLoading(false);
 
       navigation.navigate('Product', {product: updatedProduct});

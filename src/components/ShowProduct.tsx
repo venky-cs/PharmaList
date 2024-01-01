@@ -5,7 +5,6 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  Alert,
   Modal,
   Pressable,
 } from 'react-native';
@@ -33,13 +32,17 @@ function ShowProduct() {
   const confirmDelete = async () => {
     try {
       // Delete the product from Firestore
-      await firestore().collection('Product').doc(product.key).delete();
+      await firestore()
+        .collection('Product')
+        .doc(product?.key || product?.id)
+        .delete();
 
       // Close the modal
       setIsDeleteModalVisible(false);
 
       // Navigate back to the previous screen or update the UI as needed
-      navigation.goBack();
+      // navigation.goBack();
+      navigation.navigate('Products');
     } catch (error) {
       console.error('Error deleting product:', error);
       // Handle error
